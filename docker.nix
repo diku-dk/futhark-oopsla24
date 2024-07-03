@@ -40,6 +40,7 @@ pkgs.dockerTools.buildLayeredImage {
      scc
      hyperfine
      gnuplot
+     bc
     ];
 
   config = {
