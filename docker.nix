@@ -29,7 +29,7 @@ pkgs.dockerTools.buildLayeredImage {
   name = "futhark-oopsla24";
   tag = "latest";
   fromImage = image;
-  contents = with pkgs; 
+  contents = with pkgs;
     [futhark-original
      futhark-automap
      benchmarks
