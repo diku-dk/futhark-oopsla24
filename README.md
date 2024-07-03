@@ -1,5 +1,22 @@
 # Artifact for the paper *AUTOMAP: Inferring Rank-Polymorphic Function Applications with Integer Linear Programming*
 
+## Requirements
+
+The following system requirements are satisfied by the Docker image,
+and are only listed for completeness.
+
+PATH must contain two compiler binaries `futhark-original` and
+`futhark-automap`, corresponding to the unmodified and AUTOMAP-enabled
+Futhark compiler.
+
+The following tools must also be available:
+
+* [scc](https://github.com/boyter/scc)
+
+* [hyperfine](https://github.com/sharkdp/hyperfine)
+
+* [gnuplot](http://gnuplot.info/)
+
 ## Reproducing experiments
 
 Running `make` will reproduce the quantitative evaluation discussed in
@@ -24,22 +41,24 @@ The following specific metrics are reproduced by the artifact.
   * The mean type checking slowdown is the last line of
     `reports/tctime.txt`.
 
-## Requirements
+## Interactive use
 
-The following system requirements are satisfied by the Docker image,
-and are only listed for completeness.
+If desired, AUTOMAP can be tried by starting a REPL with
 
-PATH must contain two compiler binaries `futhark-original` and
-`futhark-automap`, corresponding to the unmodified and AUTOMAP-enabled
-Futhark compiler.
+```
+$ futhark-automap repl
+```
 
-The following tools must also be available:
+and entering valid expressions. Examples:
 
-* [scc](https://github.com/boyter/scc)
-
-* [hyperfine](https://github.com/sharkdp/hyperfine)
-
-* [gnuplot](http://gnuplot.info/)
+```
+> [1,2,3] + 2
+[3, 4, 5]
+>  [1,2,3] * transpose (rep [4,5,6])
+[[4, 8, 12],
+ [5, 10, 15],
+ [6, 12, 18]]
+```
 
 ## Manifest
 
