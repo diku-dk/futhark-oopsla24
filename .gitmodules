@@ -5,3 +5,10 @@
 	path = futhark-automap
 	url = git@github.com:diku-dk/futhark.git
 	branch = automap
+[submodule "futhark-benchmarks-original"]
+	path = futhark-benchmarks-original
+	url = git@github.com:diku-dk/futhark-benchmarks.git
+[submodule "futhark-benchmarks-automap"]
+	path = futhark-benchmarks-automap
+	url = git@github.com:diku-dk/futhark-benchmarks.git
+	branch = automap
