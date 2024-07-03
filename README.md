@@ -65,18 +65,18 @@ and entering valid expressions. Examples:
 This section describes every top-level file and directory in the
 artifact and its purpose.
 
-* `data.sh`: The main data analysis script, invoked by `Makefile`.
+* `benchmarks/data.sh`: The main data analysis script, invoked by `Makefile`.
 
-* `findilps.awk`: An Awk script that extracts ILP programs from
+* `benchmarks/findilps.awk`: An Awk script that extracts ILP programs from
   compiler logs.
 
-* `futhark-benchmarks-automap`: The Futhark benchmark suite modified
+* `benchmarks/futhark-benchmarks-automap`: The Futhark benchmark suite modified
   to take advantage of `automap`.
 
-* `futhark-benchmarks-original`: The unmodified Futhark benchmark
+* `benchmarks/futhark-benchmarks-original`: The unmodified Futhark benchmark
   suite.
 
-* `Makefile`: A simplistic Makefile that simply runs `data.sh`.
+* `benchmarks/Makefile`: A simplistic Makefile that simply runs `data.sh`.
 
 More files and directories are created as part of the artifact as
 discussed above.
