@@ -32,7 +32,11 @@ pkgs.dockerTools.buildLayeredImage {
   contents = with pkgs;
     [futhark-original
      futhark-automap
+
+     # Data files
      benchmarks
+
+     # Dependencies
      coreutils
      bash
      findutils
