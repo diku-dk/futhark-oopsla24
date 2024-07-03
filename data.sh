@@ -10,23 +10,23 @@
 # - hyperfine
 # - gnuplot
 #
-# You must also have two binaries 'futhark-master' and
+# You must also have two binaries 'futhark-original' and
 # 'futhark-automap' in your PATH, and two clones of the appropriate
 # futhark-benchmarks branches:
 #
-# $ git clone  -b master git@github.com:diku-dk/futhark-benchmarks.git futhark-benchmarks-master
+# $ git clone  -b master git@github.com:diku-dk/futhark-benchmarks.git futhark-benchmarks-original
 #
 # $ git clone  -b automap git@github.com:diku-dk/futhark-benchmarks.git futhark-benchmarks-automap
 
 set -e
 
 # Directory containing unmodified benchmarks.
-master=futhark-benchmarks-master
+master=futhark-benchmarks-original
 # Directory containing AUTOMAPed benchmarks.
 automap=futhark-benchmarks-automap
 
-# Unmodified compiler
-futhark_master=futhark-master
+# Original compiler
+futhark_master=futhark-original
 # AUTOMAP compiler
 futhark_automap=futhark-automap
 
