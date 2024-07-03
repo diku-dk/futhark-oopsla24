@@ -18,11 +18,11 @@ let
   });
   benchmarks = pkgs.copyPathToStore ./benchmarks;
   image = pkgs.dockerTools.pullImage {
-    imageName = "archlinux";
-    imageDigest = "sha256:4d4821711ba77904458da94ad3db7de44184c6945eb684f96438fe7778b2420f";
-    sha256 = "xh4pORTdjryCMkEJdmjZUBmIVldaQ7EmtjLhKi5xe9M=";
-    finalImageName = "archlinux";
-    finalImageTag = "base-devel";
+    imageName = "debian";
+    imageDigest = "sha256:f8bbfa052db81e5b8ac12e4a1d8310a85d1509d4d0d5579148059c0e8b717d4e";
+    sha256 = "RxqDaCm/uRWfwruipruYknaAbQPcuo7Sk3kO2SaFBGQ=";
+    finalImageName = "debian";
+    finalImageTag = "stable-slim";
   };
 in
 pkgs.dockerTools.buildLayeredImage {
