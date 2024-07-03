@@ -54,17 +54,17 @@ report_lines() {
     sloc_automap=$(lines $programs_automap)
 
     echo
-    echo "# Scope"
+    echo "# Lines of code"
     echo "Number of programs: $num_programs"
-    echo "SLOC (master):  $sloc_master"
-    echo "SLOC (automap): $sloc_automap"
+    echo "SLOC (original): $sloc_master"
+    echo "SLOC (AUTOMAP):  $sloc_automap"
 }
 
 maps_out=data/maps.txt
 report_maps() {
     rm -f $maps_out
     echo
-    echo "# Reductions in maps"
+    echo "# Change in number in maps after utilising AUTOMAP"
     total_maps_master=0
     total_maps_automap=0
     for p in $programs_nodir; do
@@ -77,7 +77,7 @@ report_maps() {
         echo "$p $total_maps_master $total_maps_automap" >> $maps_out
     done
     echo
-    printf "Total maps: %3d => %3d\n" $total_maps_master $total_maps_automap
+    printf "Total change in maps: %3d => %3d\n" $total_maps_master $total_maps_automap
 }
 
 checktime() {
@@ -90,7 +90,7 @@ tctime_out=data/tctime.txt
 report_tctime() {
     rm -f $tctime_out
     echo
-    echo "# Typechecking overhead"
+    echo "# Type checking overhead"
     for p in $programs_nodir; do
         printf "%-60s " "$p"
         time_master=$(checktime "$futhark_master" "$master/$p")
@@ -114,12 +114,12 @@ report_ilps() {
     echo "# Extracting ILPs"
     for p in $programs_nodir; do
         printf "%-60s " "$p"
-        mkdir -p $(dirname ilps/$p)
-        if ! FUTHARK_COMPILER_DEBUGGING=3 "$futhark_automap" check "$automap/$p" 2> ilps/$p.log; then
+        mkdir -p $(dirname data/ilps/$p)
+        if ! FUTHARK_COMPILER_DEBUGGING=3 "$futhark_automap" check "$automap/$p" 2> data/ilps/$p.log; then
             printf "Failed\n"
         else
-            awk -f findilps.awk < ilps/$p.log > ilps/$p.ilps
-            k=$(cat ilps/$p.ilps | awk 'BEGIN{max=0}{if (int($2) > max){max=int($2)}}END{print max}')
+            awk -f findilps.awk < data/ilps/$p.log > data/ilps/$p.ilps
+            k=$(cat data/ilps/$p.ilps | awk 'BEGIN{max=0}{if (int($2) > max){max=int($2)}}END{print max}')
             printf "Largest ILP: $k\n"
         fi
     done
@@ -127,7 +127,7 @@ report_ilps() {
 
 analyse_ilps() {
     for p in $programs_nodir; do
-        cat ilps/$p.ilps
+        cat data/ilps/$p.ilps
     done | sort | uniq | sort --key=2 --numeric > data/ilptable
 
     awk '{print $2}' <data/ilptable >data/ilpsizes
@@ -136,11 +136,12 @@ analyse_ilps() {
 }
 
 mkdir -p data
+mkdir -p reports
 
 # Comment out the reports you are not interested in.
 
-report_lines
-report_maps
-report_tctime
-report_ilps
+report_lines | tee reports/lines.txt
+report_maps | tee reports/maps.txt
+report_tctime | tee reports/tctime.txt
+report_ilps | tee reports/ilps.txt
 analyse_ilps
