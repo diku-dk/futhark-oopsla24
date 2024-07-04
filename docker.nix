@@ -37,6 +37,7 @@ in pkgs.dockerTools.buildImage {
       gawk
       bash
       findutils
+      fontconfig
       nano
       scc
       hyperfine
@@ -48,6 +49,20 @@ in pkgs.dockerTools.buildImage {
   runAsRoot = ''
     mkdir -p /tmp
     chmod 777 /tmp
+
+    mkdir /.cache
+    chmod 777 /.cache
+    export XDG_CACHE_HOME=/.cache
+
+    mkdir -p /.cache/fonts
+    chmod 777 /.cache/fonts
+
+    mkdir -p /etc/fonts
+    chmod 777 /etc/fonts
+    cp -r ${pkgs.fontconfig.out}/etc/fonts/* /etc/fonts/
+    export FONTCONFIG_PATH=/etc/fonts
+
+    fc-cache -fv
   '';
 
   config = {
