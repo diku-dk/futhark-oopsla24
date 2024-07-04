@@ -51,7 +51,8 @@ paper.
   a best-effort ASCII plot to the terminal.
 
 * Fig. 13 is available as `reports/fig13.txt`, and is also printed to
-  the terminal.
+  the terminal. The reported slowdown can vary from machine to
+  machine, but the other metrics should match the paper exactly.
 
 This completes the evaluation of the functionality as far as concerns
 reproducing the quantitative claims in the paper.
