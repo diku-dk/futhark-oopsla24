@@ -16,7 +16,7 @@ let
                   cp futhark-nightly/bin/futhark $out/bin/futhark-automap
                 '';
   });
-  benchmarks = pkgs.copyPathToStore ./benchmarks;
+  artifact = pkgs.copyPathToStore ./artifact;
   image = pkgs.dockerTools.pullImage {
     imageName = "debian";
     imageDigest = "sha256:f8bbfa052db81e5b8ac12e4a1d8310a85d1509d4d0d5579148059c0e8b717d4e";
@@ -34,7 +34,7 @@ pkgs.dockerTools.buildLayeredImage {
      futhark-automap
 
      # Data files
-     benchmarks
+     artifact
 
      # Dependencies
      coreutils
@@ -49,7 +49,7 @@ pkgs.dockerTools.buildLayeredImage {
 
   config = {
     Cmd = [ "/bin/bash"];
-    WorkingDir = "${benchmarks}";
+    WorkingDir = "${artifact}";
   };
 
 }

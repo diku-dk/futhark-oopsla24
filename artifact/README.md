@@ -43,22 +43,16 @@ Section 9 of the paper. This takes about TBD minutes on a modern
 computer. The results are printed on the terminal as they come in, and
 are also stored as files in the `results/` directory. A `data/`
 directory containing raw (unprocessed) data is also constructed, but
-can be ignored.
+can be ignored. Its contents are described further down for the
+benefit of future users who want to more deeply investigate the
+results. Finally, the artifact reproduces Fig. 12 and Fig. 13 from the
+paper.
 
-The following specific metrics are reproduced by the artifact.
+* Fig. 12 is available as `reports/fig12.pdf`, and is also printed as
+  a best-effort ASCII plot to the terminal.
 
-* Fig. 12 is available as `reports/ilps.pdf`.
-
-* The metrics on Fig. 13 are available in multiple files.
-
-  * Number of programs and lines of code are in `reports/lines.txt`.
-
-  * Change in maps is the last line of `reports/maps.txt`.
-
-  * Largest, median, and mean ILP is in TODO
-
-  * The mean type checking slowdown is the last line of
-    `reports/tctime.txt`.
+* Fig. 13 is available as `reports/fig13.txt`, and is also printed to
+  the terminal.
 
 ## Interactive use
 
@@ -78,6 +72,10 @@ and entering valid expressions. Examples:
  [5, 10, 15],
  [6, 12, 18]]
 ```
+
+## Raw data files
+
+
 
 ## Manifest
 

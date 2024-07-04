@@ -1,7 +1,7 @@
 # Meta-Artifact for the paper *AUTOMAP: Inferring Rank-Polymorphic Function Applications with Integer Linear Programming*
 
 This repository contains a Nix derivation for building the artifact (a
-Docker image) for the paper. See [benchmarks/](benchmarks/) for the
+Docker image) for the paper. See [artifact/](artifact/) for the
 actual benchmarking infrastructure, including dependencies, if you
 want to run it outside docker.
 
@@ -26,5 +26,5 @@ And then run with:
 $ docker run -it futhark-oopsla24:latest
 ```
 
-See [benchmarks/README.md](benchmarks/README.md) for further
+See [artifact/README.md](artifact/README.md) for further
 instructions.

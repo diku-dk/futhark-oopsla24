@@ -1,6 +1,4 @@
 set print 'data/ilpstats'
-set terminal pdf size 4,2
-set output 'reports/ilps.pdf'
 set zeroaxis
 set style data points
 set key box top left
