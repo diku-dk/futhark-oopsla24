@@ -34,17 +34,17 @@ futhark_automap=futhark-automap
 # that these exist in both the futhark-benchmarks-original and
 # futhark-benchmarks-automap directory trees.
 programs() {
-    ls $1/accelerate/*/*.fut \
-       $1/finpar/*.fut \
-       $1/rodinia/*/*.fut \
-       $1/pbbs/*/*.fut \
-       $1/parboil/*/*.fut \
+    ls "$1"/accelerate/*/*.fut \
+       "$1"/finpar/*.fut \
+       "$1"/rodinia/*/*.fut \
+       "$1"/pbbs/*/*.fut \
+       "$1"/parboil/*/*.fut \
        | grep -v -e -gui.fut
 }
 
 programs_original=$(programs "$original")
 programs_automap=$(programs "$automap")
-programs_nodir=$(echo $programs_original | sed s,$original/,,g)
+programs_nodir=$(echo "$programs_original" | sed s,$original/,,g)
 
 # Get the non-source non-blank line count, using scc(1).
 lines() {
@@ -52,9 +52,9 @@ lines() {
 }
 
 report_lines() {
-    num_programs=$(echo $programs_original | wc -w)
-    sloc_original=$(lines $programs_original)
-    sloc_automap=$(lines $programs_automap)
+    num_programs=$(echo "$programs_original" | wc -w)
+    sloc_original=$(lines "$programs_original")
+    sloc_automap=$(lines "$programs_automap")
 
     echo
     echo "# Lines of code"
@@ -71,17 +71,17 @@ report_maps() {
     total_maps_automap=0
     for p in $programs_nodir; do
         printf "%-60s " "$p"
-        maps_original=$(cat "$original/$p" | grep -E '\bmap[1-9]?\W' -o | wc -l)
-        maps_automap=$(cat "$automap/$p" | grep -E '\bmap[1-9]?\W' -o | wc -l)
+        maps_original=$(grep <"$original/$p" -E '\bmap[1-9]?\W' -o | wc -l)
+        maps_automap=$(grep <"$automap/$p" -E '\bmap[1-9]?\W' -o | wc -l)
         printf "%2d => %2d\n" "$maps_original" "$maps_automap"
-        total_maps_original=$(($total_maps_original+$maps_original))
-        total_maps_automap=$(($total_maps_automap+$maps_automap))
+        total_maps_original=$((total_maps_original+maps_original))
+        total_maps_automap=$((total_maps_automap+maps_automap))
         echo "$p $total_maps_original $total_maps_automap" >> data/maps.txt
     done
     echo
     printf "Total change in maps: %3d => %3d\n" $total_maps_original $total_maps_automap
-    echo -n "$total_maps_original" > "data/maps_original"
-    echo -n "$total_maps_automap" > "data/maps_automap"
+    echo "$total_maps_original" > "data/maps_original"
+    echo "$total_maps_automap" > "data/maps_automap"
 }
 
 checktime() {
@@ -98,7 +98,7 @@ report_tctime() {
         printf "%-60s " "$p"
         time_original=$(checktime "$futhark_original" "$original/$p")
         time_automap=$(checktime "$futhark_automap" "$automap/$p")
-        if [ "$time_original" -a "$time_automap" ]; then
+        if [ "$time_original" ] && [ "$time_automap" ]; then
             slowdown=$(echo "scale=2; $time_automap / $time_original" | bc)
             printf "%.2fx\n" "$slowdown"
             echo "$p $time_original $time_automap" >> data/tctime.txt
@@ -109,7 +109,7 @@ report_tctime() {
 
     echo
     awk 'BEGIN{x}{x+=$3/$2}END{printf "%.2f",x/FNR}' < data/tctime.txt > data/mean_slowdown
-    printf "Mean slowdown: $(cat data/mean_slowdown)\n"
+    printf "Mean slowdown: %s\n" "$(cat data/mean_slowdown)"
 }
 
 report_ilps() {
@@ -118,13 +118,13 @@ report_ilps() {
 
     for p in $programs_nodir; do
         printf "%-60s " "$p"
-        mkdir -p $(dirname data/ilps/$p)
-        if ! FUTHARK_COMPILER_DEBUGGING=3 "$futhark_automap" check "$automap/$p" 2> data/ilps/$p.log; then
+        mkdir -p "$(dirname data/ilps/"$p")"
+        if ! FUTHARK_COMPILER_DEBUGGING=3 "$futhark_automap" check "$automap/$p" 2> data/ilps/"$p".log; then
             printf "Failed\n"
         else
-            awk -f findilps.awk < data/ilps/$p.log > data/ilps/$p.ilps
-            k=$(awk 'BEGIN{max=0}{if (int($2) > max){max=int($2)}}END{print max}' < data/ilps/$p.ilps)
-            printf "Largest ILP: $k\n"
+            awk -f findilps.awk < data/ilps/"$p".log > data/ilps/"$p".ilps
+            k=$(awk 'BEGIN{max=0}{if (int($2) > max){max=int($2)}}END{print max}' < data/ilps/"$p".ilps)
+            printf "Largest ILP: %d\n" "$k"
         fi
     done
 }
@@ -134,7 +134,7 @@ analyse_ilps() {
     echo "# Analysing ILPs"
 
     for p in $programs_nodir; do
-        cat data/ilps/$p.ilps
+        cat data/ilps/"$p".ilps
     done | sort | uniq | sort --key=2 --numeric > data/ilp_table
 
     awk '{print $2}' < data/ilp_table > data/ilp_sizes
@@ -151,7 +151,7 @@ analyse_ilps() {
 }
 
 fig13() {
-    num_programs=$(echo $programs_original | wc -w)
+    num_programs=$(echo "$programs_original" | wc -w)
     sloc_original=$(lines $programs_original)
     sloc_automap=$(lines $programs_automap)
     maps_original=$(cat data/maps_original)
