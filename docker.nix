@@ -17,38 +17,36 @@ let
                 '';
   });
   artifact = pkgs.copyPathToStore ./artifact;
-  image = pkgs.dockerTools.pullImage {
-    imageName = "debian";
-    imageDigest = "sha256:f8bbfa052db81e5b8ac12e4a1d8310a85d1509d4d0d5579148059c0e8b717d4e";
-    sha256 = "RxqDaCm/uRWfwruipruYknaAbQPcuo7Sk3kO2SaFBGQ=";
-    finalImageName = "debian";
-    finalImageTag = "stable-slim";
-  };
 in
-pkgs.dockerTools.buildLayeredImage {
+pkgs.dockerTools.buildImage {
   name = "futhark-oopsla24";
   tag = "latest";
-  fromImage = image;
-  contents = with pkgs;
-    [futhark-original
-     futhark-automap
+  copyToRoot = pkgs.buildEnv {
+    name = "image-root";
+    paths = with pkgs;
+      [futhark-original
+       futhark-automap
 
-     # Data files
-     artifact
+       # Data files
+       artifact
 
-     # Dependencies
-     coreutils
-     bash
-     findutils
-     vim
-     scc
-     hyperfine
-     gnuplot
-     bc
-    ];
+       # Dependencies
+       coreutils
+       gnugrep
+       gnused
+       gnumake
+       bash
+       findutils
+       nano
+       scc
+       hyperfine
+       gnuplot
+       bc
+      ];
+  };
 
   config = {
-    Cmd = [ "/bin/bash"];
+    Cmd = [ "/bin/bash" ];
     WorkingDir = "${artifact}";
   };
 
