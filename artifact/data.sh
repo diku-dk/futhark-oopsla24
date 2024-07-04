@@ -162,7 +162,7 @@ fig13() {
     echo "# Fig. 13"
     printf "Number of programs:          %5d\n" "${num_programs}"
     printf "Change in lines of code:     %5d => %5d\n" "${sloc_original}" "${sloc_automap}"
-    printf "Change in maps:              %5d => %5d\n" "${maps_original}" "${maps_original}"
+    printf "Change in maps:              %5d => %5d\n" "${maps_original}" "${maps_automap}"
     printf "Largest ILP size:            %5d constraints\n" "${ilp_largest}"
     printf "Median ILP size:             %5d constraints\n" "$median_ilp"
     printf "Mean ILP size:               %5d constraints\n" "$mean_ilp"
