@@ -10,7 +10,13 @@ programs. For each pair, one of the programs is the "original", and
 the other has been rewritten to take advantage of the "AUTOMAP"
 feature discussed in the paper.
 
-## Getting Started
+## Hardware dependencies
+
+None, although the Docker image uses x86-64 binaries, and so the
+system must be capable of running such an image. The memory
+requirements are modest (less than 1GiB).
+
+## Getting started
 
 The artifact takes the form of a Docker image
 `futhark-oopsla24.tar.gz`. You can load it into Docker with this
@@ -28,12 +34,6 @@ You can then run the Docker image with this command:
 ```
 $ docker run -it futhark-oopsla24:latest
 ```
-
-## Hardware dependencies
-
-None, although the Docker image uses x86-64 binaries, and so the
-system must be capable of running such an image. The memory
-requirements are modest (less than 1GiB).
 
 ## Step-by-Step instructions
 

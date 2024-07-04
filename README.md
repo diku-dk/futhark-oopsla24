@@ -24,21 +24,11 @@ git submodule update
 Run
 
 ```
-$ nix-build docker.nix
+$ nix-build docker.nix -o futhark-oopsla24.tar.gz
 ```
 
-This produces a file called `result` (a symlink to the actual image,
-which is in the Nix store), which you can load with:
-
-```
-$ docker load -i result
-```
-
-And then run with:
-
-```
-$ docker run -it futhark-oopsla24:latest
-```
+This produces a file called `futhark-oopsla24.tar.gz` (a symlink to the actual
+image, which is in the Nix store).
 
 See [artifact/README.md](artifact/README.md) for further
 instructions.
