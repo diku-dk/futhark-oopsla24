@@ -144,10 +144,7 @@ analyse_ilps() {
     echo
     echo "# Fig. 12"
     gnuplot -e 'set terminal dumb' ilps.gnu
-    if false; then
-        gnuplot -e 'set terminal pdf size 4,2' -e 'set output "reports/fig12.pdf"' ilps.gnu
-    fi
-
+    gnuplot -e 'set terminal pdf size 4,2' -e 'set output "reports/fig12.pdf"' ilps.gnu
 }
 
 fig13() {

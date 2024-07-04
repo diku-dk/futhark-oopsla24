@@ -47,8 +47,8 @@ benefit of future users who want to more deeply investigate the
 results. Finally, the artifact reproduces Fig. 12 and Fig. 13 from the
 paper.
 
-* Fig. 12 is available as `reports/fig12.txt`, and is also printed to
-  the terminal.
+* Fig. 12 is available as `reports/fig12.pdf` and `reports/fig12.pdf`,
+  with the latter also printed to the terminal.
 
 * Fig. 13 is available as `reports/fig13.txt`, and is also printed to
   the terminal. The reported slowdown can vary from machine to
