@@ -57,6 +57,22 @@ paper.
 This completes the evaluation of the functionality as far as concerns
 reproducing the quantitative claims in the paper.
 
+### Retrieving the figures from the Docker container
+
+To copy a figure from the container for viewing, first obtain the container ID
+by running
+
+```
+$ docker ps
+```
+
+You can then copy the figure using `docker cp`:
+
+```
+$ docker cp <container ID>:<path to figure in the container> <destination>
+```
+
+
 ### Interactive use
 
 If desired, AUTOMAP can be tried by starting a REPL with
