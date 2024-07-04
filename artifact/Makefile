@@ -1,2 +1,2 @@
 all:
-	sh data.sh report_lines
+	sh data.sh
