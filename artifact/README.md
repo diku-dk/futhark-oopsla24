@@ -1,6 +1,18 @@
 # Artifact for the paper *AUTOMAP: Inferring Rank-Polymorphic Function Applications with Integer Linear Programming*
 
-This artifact takes the form of a Docker image
+## Introduction
+
+This artifact reproduces the quantitative evaluation discussed in
+Section 9 of the paper, in particular reproducing Fig. 12 and Fig. 13.
+
+We perform a comparative study on a set of pairs of similar benchmark
+programs. For each pair, one of the programs is the "original", and
+the other has been rewritten to take advantage of the "AUTOMAP"
+feature discussed in the paper.
+
+## Getting Started
+
+The artifact takes the form of a Docker image
 `futhark-oopsla24.tar.gz`. You can load it into Docker with this
 command:
 
@@ -17,29 +29,16 @@ You can then run the Docker image with this command:
 $ docker run -it futhark-oopsla24:latest
 ```
 
-## Requirements
+## Hardware dependencies
 
-The following system requirements are satisfied by the Docker image,
-and are only listed for the sake of completeness.
+None, although the Docker image uses x86-64 binaries, and so the
+system must be capable of running such an image. The memory
+requirements are modest (less than 1GiB).
 
-PATH must contain two compiler binaries `futhark-original` and
-`futhark-automap`, corresponding to the unmodified and AUTOMAP-enabled
-Futhark compiler.
-
-The following tools must also be available:
-
-* [scc](https://github.com/boyter/scc)
-
-* [hyperfine](https://github.com/sharkdp/hyperfine)
-
-* [gnuplot](http://gnuplot.info/)
-
-* [bc](https://www.gnu.org/software/bc/)
-
-## Reproducing experiments
+## Step-by-Step instructions
 
 Running `make` will reproduce the quantitative evaluation discussed in
-Section 9 of the paper. This takes about TBD minutes on a modern
+Section 9 of the paper. This takes about 20 minutes on a modern
 computer. The results are printed on the terminal as they come in, and
 are also stored as files in the `results/` directory. A `data/`
 directory containing raw (unprocessed) data is also constructed, but
@@ -54,7 +53,10 @@ paper.
 * Fig. 13 is available as `reports/fig13.txt`, and is also printed to
   the terminal.
 
-## Interactive use
+This completes the evaluation of the functionality as far as concerns
+reproducing the quantitative claims in the paper.
+
+### Interactive use
 
 If desired, AUTOMAP can be tried by starting a REPL with
 
@@ -73,9 +75,79 @@ and entering valid expressions. Examples:
  [6, 12, 18]]
 ```
 
-## Raw data files
+## Reusability Guide
 
+The artifact is reasonably straightforward to modify in two ways:
+modifying which benchmark programs are considered, and performing
+analysis on the raw data.
 
+### Changing benchmark programs
+
+In `data.sh`, modify the shell function `programs`. This function
+produces paths to `.fut` programs that are relative to the directory
+`futhark-benchmarks-original` or `futhark-benchmarks-automap`. It is
+important that a version of the program exists in both of these
+directory trees (corresponding to a version of the program without and
+with use of AUTOMAP).
+
+### Raw data files
+
+After running the artifact, the `data/` directory contains raw data.
+This data is processed to reproduce Fig. 12 and Fig. 13, but can also
+be subjected to other investigation. The following data is produced.
+
+* `data/ilps`: contains a pair of files for each benchmark program
+  `foo.fut`: an `.ilps` file (containing a table of the ILP size for
+  each function in the program), and a `.log` file containing the raw
+  (unprocessed) compiler logging output.
+
+* `data/ilp_table`: a table of the sizes of all ILP problems, keyed by
+  the (internal) name of the function that gave rise to them.
+
+* `data/ilp_sizes`: a sorted list of the sizes of all ILP problems
+  produced during type checking the benchmark programs.
+
+* `data/ilp_stats`: various statistical measures derived from
+  `data/ilp_sizes`.
+
+* `data/largest_ilp`: the size (in number of constraints) of the
+  largest ILP problem encountered.
+
+* `data/maps_automap`: the total number of `map`s used in the
+  AUTOMAP-enabled benchmark programs.
+
+* `data/maps_original`: the total number of `map`s used in the original
+  benchmark programs.
+
+* `data/maps.txt`: contains a line for each benchmark program,
+  comprising the name of the program, the number of `map`s in the
+  original program, and the number of `map`s in the AUTOMAPped
+  program.
+
+## Running outside Docker
+
+The following system requirements are satisfied by the Docker image,
+and are only listed for the sake of completeness, in particular if you
+want to run it outside of Docker.
+
+PATH must contain two compiler binaries `futhark-original` and
+`futhark-automap`, corresponding to the unmodified and AUTOMAP-enabled
+Futhark compiler.
+
+The following tools must also be available:
+
+* [scc](https://github.com/boyter/scc)
+
+* [hyperfine](https://github.com/sharkdp/hyperfine)
+
+* [gnuplot](http://gnuplot.info/)
+
+* [bc](https://www.gnu.org/software/bc/)
+
+* [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+
+* A handful of standard command like tools like `grep`, `find`, `wc`,
+  etc.
 
 ## Manifest
 

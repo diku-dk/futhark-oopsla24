@@ -33,6 +33,7 @@ pkgs.dockerTools.buildImage {
        gnugrep
        gnused
        gnumake
+       gawk
        bash
        findutils
        nano
