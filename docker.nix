@@ -21,14 +21,12 @@ in
 pkgs.dockerTools.buildImage {
   name = "futhark-oopsla24";
   tag = "latest";
+  created = "now";
   copyToRoot = pkgs.buildEnv {
     name = "image-root";
     paths = with pkgs;
       [futhark-original
        futhark-automap
-
-       # Data files
-       artifact
 
        # Dependencies
        coreutils
@@ -44,6 +42,12 @@ pkgs.dockerTools.buildImage {
        bc
       ];
   };
+
+
+  runAsRoot = ''
+    mkdir -p /tmp
+    chmod 777 /tmp
+  '';
 
   config = {
     Cmd = [ "/bin/bash" ];
