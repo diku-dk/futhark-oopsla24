@@ -1,9 +1,11 @@
 { pkgs ? import (fetchTarball
   "https://github.com/NixOS/nixpkgs/archive/794e497348ea2019c258aeefc2c9526a0873f9be.tar.gz")
+  { }, futhark-original0 ? import (fetchTarball
+    "https://github.com/diku-dk/futhark/archive/22e3026f8648213baec7b0ee45aec7d01dba9794.tar.gz")
+  { }, futhark-automap0 ? import (fetchTarball
+    "https://github.com/diku-dk/futhark/archive/0d7e6614f6699b6cce0b9fcb791749bbe16b657a.tar.gz")
   { } }:
 let
-  futhark-original0 = import ./futhark-original/default.nix { };
-  futhark-automap0 = import ./futhark-automap/default.nix { };
   futhark-original = futhark-original0.overrideAttrs (old: {
     installPhase = ''
       mkdir -p $out/bin
