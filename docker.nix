@@ -2,8 +2,8 @@
   "https://github.com/NixOS/nixpkgs/archive/794e497348ea2019c258aeefc2c9526a0873f9be.tar.gz")
   { } }:
 let
-  futhark-original0 = import ./futhark-original/default.nix { };
-  futhark-automap0 = import ./futhark-automap/default.nix { };
+  futhark-original0 = import ./artifact/futhark-original/default.nix { };
+  futhark-automap0 = import ./artifact/futhark-automap/default.nix { };
   futhark-original = futhark-original0.overrideAttrs (old: {
     installPhase = ''
       mkdir -p $out/bin

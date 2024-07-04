@@ -1,8 +1,8 @@
 [submodule "futhark-original"]
-	path = futhark-original
+	path = artifact/futhark-original
 	url = git@github.com:diku-dk/futhark.git
 [submodule "futhark-automap"]
-	path = futhark-automap
+	path = artifact/futhark-automap
 	url = git@github.com:diku-dk/futhark.git
 	branch = automap
 [submodule "futhark-benchmarks-original"]
