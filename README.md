@@ -7,7 +7,21 @@ want to run it outside docker.
 
 ## (Re-)creating the Docker image
 
-You must have [Nix](https://nixos.org/) and then run
+### Requirements
+- The [Nix](https://nixos.org/) package manager.
+
+### Initial setup
+
+You must initialize and update the submodules:
+
+```
+git submodule init
+git submodule update
+```
+
+### Building the Docker image
+
+Run
 
 ```
 $ nix-build docker.nix
