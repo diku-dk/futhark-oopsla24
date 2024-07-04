@@ -47,8 +47,8 @@ benefit of future users who want to more deeply investigate the
 results. Finally, the artifact reproduces Fig. 12 and Fig. 13 from the
 paper.
 
-* Fig. 12 is available as `reports/fig12.pdf`, and is also printed as
-  a best-effort ASCII plot to the terminal.
+* Fig. 12 is available as `reports/fig12.txt`, and is also printed to
+  the terminal.
 
 * Fig. 13 is available as `reports/fig13.txt`, and is also printed to
   the terminal. The reported slowdown can vary from machine to
@@ -109,9 +109,9 @@ be subjected to other investigation. The following data is produced.
   produced during type checking the benchmark programs.
 
 * `data/ilp_stats`: various statistical measures derived from
-  `data/ilp_sizes`.
+  `data/ilp_sizes`, including mean and median.
 
-* `data/largest_ilp`: the size (in number of constraints) of the
+* `data/ilp_largest`: the size (in number of constraints) of the
   largest ILP problem encountered.
 
 * `data/maps_automap`: the total number of `map`s used in the
