@@ -19,11 +19,11 @@ requirements are modest (less than 1GiB).
 ## Getting started
 
 The artifact takes the form of a Docker image
-`futhark-oopsla24.tar.gz`. You can load it into Docker with this
+`607.tar.gz`. You can load it into Docker with this
 command:
 
 ```
-$ docker load -i futhark-oopsla24.tar.gz
+$ docker load -i 607.tar.gz
 ```
 
 (Depending on your system configuration, this may or may not require
@@ -32,7 +32,7 @@ root access.)
 You can then run the Docker image with this command:
 
 ```
-$ docker run -it futhark-oopsla24:latest
+$ docker run -it 607:latest
 ```
 
 ## Step-by-Step instructions
