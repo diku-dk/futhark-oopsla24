@@ -38,6 +38,7 @@ in pkgs.dockerTools.buildImage {
       bash
       findutils
       fontconfig
+      less
       nano
       scc
       hyperfine
