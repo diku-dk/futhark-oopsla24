@@ -161,7 +161,7 @@ The following tools must also be available:
 
 * [bc](https://www.gnu.org/software/bc/)
 
-* [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+* [awk](https://www.gnu.org/software/gawk/manual/gawk.html)
 
 * A handful of standard command like tools like `grep`, `find`, `wc`,
   etc.
