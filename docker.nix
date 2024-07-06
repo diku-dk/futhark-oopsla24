@@ -20,7 +20,7 @@ let
   });
   artifact = pkgs.copyPathToStore ./artifact;
 in pkgs.dockerTools.buildImage {
-  name = "futhark-oopsla24";
+  name = "607";
   tag = "latest";
   created = "now";
   copyToRoot = pkgs.buildEnv {
