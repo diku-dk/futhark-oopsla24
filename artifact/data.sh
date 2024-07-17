@@ -53,8 +53,8 @@ lines() {
 
 report_lines() {
     num_programs=$(echo "$programs_original" | wc -w)
-    sloc_original=$(lines "$programs_original")
-    sloc_automap=$(lines "$programs_automap")
+    sloc_original=$(lines $programs_original)
+    sloc_automap=$(lines $programs_automap)
 
     echo
     echo "# Lines of code"
