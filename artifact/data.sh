@@ -142,12 +142,12 @@ analyse_ilps() {
     tail -n 1 < data/ilp_sizes > data/ilp_largest
 
     echo
-    echo "# Fig. 12"
+    echo "# Fig. 18"
     gnuplot -e 'set terminal dumb' ilps.gnu
-    gnuplot -e 'set terminal pdf size 4,2' -e 'set output "reports/fig12.pdf"' ilps.gnu
+    gnuplot -e 'set terminal pdf size 4,2' -e 'set output "reports/fig18.pdf"' ilps.gnu
 }
 
-fig13() {
+fig19() {
     num_programs=$(echo "$programs_original" | wc -w)
     sloc_original=$(lines $programs_original)
     sloc_automap=$(lines $programs_automap)
@@ -159,7 +159,7 @@ fig13() {
     mean_slowdown=$(cat data/mean_slowdown)
 
     echo
-    echo "# Fig. 13"
+    echo "# Fig. 19"
     printf "Number of programs:          %5d\n" "${num_programs}"
     printf "Change in lines of code:     %5d => %5d\n" "${sloc_original}" "${sloc_automap}"
     printf "Change in maps:              %5d => %5d\n" "${maps_original}" "${maps_automap}"
@@ -176,5 +176,5 @@ report_lines | tee reports/lines.txt
 report_maps | tee reports/maps.txt
 report_tctime | tee reports/tctime.txt
 report_ilps | tee reports/ilps.txt
-analyse_ilps | tee reports/fig12.txt
-fig13 | tee reports/fig13.txt
+analyse_ilps | tee reports/fig18.txt
+fig19 | tee reports/fig19.txt

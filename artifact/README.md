@@ -3,7 +3,7 @@
 ## Introduction
 
 This artifact reproduces the quantitative evaluation discussed in
-Section 9 of the paper, in particular reproducing Fig. 12 and Fig. 13.
+Section 9 of the paper, in particular reproducing Fig. 18 and Fig. 19.
 
 We perform a comparative study on a set of pairs of similar benchmark
 programs. For each pair, one of the programs is the "original", and
@@ -44,13 +44,13 @@ are also stored as files in the `results/` directory. A `data/`
 directory containing raw (unprocessed) data is also constructed, but
 can be ignored. Its contents are described further down for the
 benefit of future users who want to more deeply investigate the
-results. Finally, the artifact reproduces Fig. 12 and Fig. 13 from the
+results. Finally, the artifact reproduces Fig. 18 and Fig. 19 from the
 paper.
 
-* Fig. 12 is available as `reports/fig12.pdf` and `reports/fig12.txt`,
+* Fig. 18 is available as `reports/fig18.pdf` and `reports/fig18.txt`,
   with the latter also printed to the terminal.
 
-* Fig. 13 is available as `reports/fig13.txt`, and is also printed to
+* Fig. 19 is available as `reports/fig19.txt`, and is also printed to
   the terminal. The reported slowdown can vary from machine to
   machine, but the other metrics should match the paper exactly.
 
@@ -110,7 +110,7 @@ with use of AUTOMAP).
 ### Raw data files
 
 After running the artifact, the `data/` directory contains raw data.
-This data is processed to reproduce Fig. 12 and Fig. 13, but can also
+This data is processed to reproduce Fig. 18 and Fig. 19, but can also
 be subjected to other investigation. The following data is produced.
 
 * `data/ilps`: contains a pair of files for each benchmark program
